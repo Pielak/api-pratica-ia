@@ -1,23 +1,18 @@
-tarefas = []
-contador_id = 1
+from sqlalchemy import create_engine
+from sqlalchemy.orm import sessionmaker, declarative_base
 
-def get_all():
-    return tarefas
+SQLALCHEMY_DATABASE_URL = "sqlite:///./tarefas.db"
 
-def get_by_id(id):
-    for t in tarefas:
-        if t["id"] == id:
-            return t
-    return None
+engine = create_engine(
+    SQLALCHEMY_DATABASE_URL, connect_args={"check_same_thread": False}
+)
+SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
+Base = declarative_base()
 
-def create(tarefa):
-    global contador_id
-    nova = tarefa.dict()
-    nova["id"] = contador_id
-    contador_id += 1
-    tarefas.append(nova)
-    return nova
 
-def delete(id):
-    global tarefas
-    tarefas = [t for t in tarefas if t["id"] != id]
+def get_db():
+    db = SessionLocal()
+    try:
+        yield db
+    finally:
+        db.close()
