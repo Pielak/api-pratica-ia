@@ -63,6 +63,29 @@ Todos os campos são opcionais — envie apenas o que deseja alterar.
 DELETE /tarefas/{id}
 ```
 
+## Exemplos com curl
+
+```bash
+# Criar uma tarefa
+curl -X POST http://localhost:8000/tarefas \
+  -H "Content-Type: application/json" \
+  -d '{"titulo": "Estudar FastAPI", "descricao": "Ver a documentação oficial"}'
+
+# Listar tarefas (com paginação)
+curl http://localhost:8000/tarefas?skip=0&limit=10
+
+# Buscar tarefa por ID
+curl http://localhost:8000/tarefas/1
+
+# Marcar como concluída
+curl -X PUT http://localhost:8000/tarefas/1 \
+  -H "Content-Type: application/json" \
+  -d '{"concluida": true}'
+
+# Deletar tarefa
+curl -X DELETE http://localhost:8000/tarefas/1
+```
+
 ## Testes
 
 ```bash
