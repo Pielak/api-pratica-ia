@@ -33,6 +33,7 @@ GET /tarefas?skip=0&limit=10
 ```
 GET /tarefas/{id}
 ```
+### nova tarefa
 
 ### Criar tarefa
 ```
