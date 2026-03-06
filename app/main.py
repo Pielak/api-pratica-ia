@@ -40,7 +40,7 @@ def atualizar(id: int, dados: TarefaUpdate, db: Session = Depends(database.get_d
     db.commit()
     db.refresh(tarefa)
     return tarefa
-
+## teste de comentário
 
 @app.delete("/tarefas/{id}", status_code=status.HTTP_204_NO_CONTENT)
 def deletar(id: int, db: Session = Depends(database.get_db)):
